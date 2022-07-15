@@ -1,2 +1,2 @@
 # bsik-module-sysinfo
-bsik module sysinfo main repo
+bsik module sysinfo main repo ...
