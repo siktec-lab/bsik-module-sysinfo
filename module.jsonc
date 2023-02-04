@@ -4,42 +4,31 @@
 		"name" 	: "SIKTEC - Shlomo Hassid",
 		"email" : "siktec.lab@gmail.com",
 		"about" : "SIKTEC core developer",
-		"web" 	: "siktec.net"
+		"web" 	: "https://siktec.net"
 	},
 	"this" : {
 		"type"  : "single", /* single | bundle */
-		"ver"   : "1.0.0",
-		"rep"   : "", /* repository url*/
+		"ver"   : "1.0.1",
+		"rep"   : "https://github.com/siktec-lab/bsik-module-sysinfo", /* repository url*/
 		"title" : "BSik System Information",
-		"description" : "Useful core information about your system"
+		"description" : "Useful core information about your system."
 	},
 	"modules" : [
 		{
 			"schema" : "1.0.0",
 			"type"  : "included", /* included | remote */
 			"name"  : "sysinfo", /* module name must be the same as the static folder */
-			"url"   : "", /* also used by remote type */
-			"ver"   : "1.0.0",
+			"rep"   : "https://github.com/siktec-lab/bsik-module-sysinfo", /* also used by remote type */
+			"ver"   : "1.0.1",
+			"title" : "BSik System Information",
+			"description" : "Useful core information about your system.",
 			/* this part is only for single modules */
 			"author" : {
 				"name" 	: "SIKTEC - Shlomo Hassid",
 				"email" : "siktec.lab@gmail.com",
 				"about" : "SIKTEC core developer",
-				"web" 	: "siktec.net"
+				"web" 	: "https://siktec.net"
 			},
-			"settings" : {
-				"title" : "BSIK - System Information",
-				"desc"  : "Useful core information about your system."
-			}, 
-			"defaults" : {
-
-			}, 
-			"privileges" : {
-				"users"   : false,
-				"content" : false,
-				"admin"   : true,
-				"install" : false
-			}, 
 			"menu" : {
 				"text": "System Info",
 				"title": "BSIK - System Information",
@@ -49,11 +38,10 @@
 				"order": 121,
 				"sub": []
 			},
-			"tables"  			: [],
-			"install_script"	: "",
-			"activate_script"	: "",
-			"disable_script"	: "",
-			"uninstall_script"	: ""
+			"depends" : [
+				{ "module"  : "core", "version" : ">=1.0.1" }
+			],
+			"tables_prefix" : "m_sysinfo"
 		}
 	]
 }

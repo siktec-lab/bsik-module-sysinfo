@@ -9,14 +9,15 @@
 1.0.1:
     ->initial, Creation
 *******************************************************************************/
-require_once PLAT_PATH_AUTOLOAD;
+require_once BSIK_AUTOLOAD;
 
-use Bsik\Builder\Components;
-use Bsik\Module\Modules;
-use Bsik\Module\Module;
-use Bsik\Module\ModuleView;
-use Bsik\Privileges as Priv;
-use Bsik\Objects\SettingsObject;
+use \Bsik\Builder\Components;
+use \Bsik\Module\Modules;
+use \Bsik\Module\Module;
+use \Bsik\Module\ModuleEvent;
+use \Bsik\Module\ModuleView;
+use \Bsik\Privileges as Priv;
+use \Bsik\Objects\SettingsObject;
 
 /****************************************************************************/
 /*******************  local Includes    *************************************/
@@ -39,19 +40,22 @@ Modules::register_module_once(new Module(
     name          : "sysinfo",
     privileges    : $module_policy,
     views         : ["sysinfo"],
-    default_view  : "sysinfo"
+    default_view  : "sysinfo",
+    settings    : new SettingsObject([
+        "title"         => "System Information",
+        "description"  => "Useful information on your system",
+    ])
 )); 
 
 /****************************************************************************/
 /*******************  View - dashboard  *************************************/
 /****************************************************************************/
-
 Modules::module("sysinfo")->register_view(
     view : new ModuleView(
         name        : "sysinfo",
         privileges  : null,
         settings    : new SettingsObject([
-            "title"         => "System Information",
+            "title"         => "Server View",
             "description"  => "Useful information on your system",
         ])
     ),
@@ -66,5 +70,16 @@ Modules::module("sysinfo")->register_view(
             </div>
         HTML;
 
+    }
+);
+
+
+/****************************************************************************/
+/*******************  Event - uninstall  ************************************/
+/****************************************************************************/
+Modules::module("sysinfo")->register_event(
+    on_events : ["me-install", "me-uninstall", "me-activate", "me-deactivate"],
+    event_method : function(string $event) {
+        $this->page::log("info", "test events", ["module" => $this->module_name, "event" => $event]);
     }
 );
